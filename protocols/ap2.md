@@ -50,9 +50,9 @@ Three mandate types form a chain:
 
 ## Sources
 
-- Spec: `docs/specification.md` in repo
-- Types: `src/ap2/types/mandate.py`
-- Roadmap: `docs/roadmap.md`
-- A2A extension: `docs/a2a-extension.md`
+- [Specification](https://github.com/google-agentic-commerce/AP2/blob/main/docs/specification.md)
+- [Mandate types (Python)](https://github.com/google-agentic-commerce/AP2/blob/main/src/ap2/types/mandate.py)
+- [Roadmap](https://github.com/google-agentic-commerce/AP2/blob/main/docs/roadmap.md)
+- [A2A extension](https://github.com/google-agentic-commerce/AP2/blob/main/docs/a2a-extension.md)
 
 *Last verified: 2026-03-31*

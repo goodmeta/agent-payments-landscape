@@ -45,9 +45,9 @@ UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, J
 
 ## Sources
 
-- Overview: `docs/specification/overview.md`
-- AP2 extension: `docs/specification/ap2-mandates.md`
-- MCP binding: `docs/specification/checkout-mcp.md`
-- Payment handlers: `docs/specification/payment-handler-guide.md`
+- [Overview](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/overview.md)
+- [AP2 mandates extension](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/ap2-mandates.md)
+- [MCP checkout binding](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/checkout-mcp.md)
+- [Payment handler guide](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/payment-handler-guide.md)
 
 *Last verified: 2026-03-31*

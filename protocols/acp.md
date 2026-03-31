@@ -39,9 +39,9 @@ Commerce checkout layer for AI agent shopping flows. Defines REST APIs for creat
 
 ## Sources
 
-- Spec: `rfcs/rfc.agentic_checkout.md`
-- Delegate Payment: `rfcs/rfc.delegate_payment.md`
-- Payment Handlers: `rfcs/rfc.payment_handlers.md`
-- OpenAPI specs: `spec/2026-01-30/openapi/`
+- [Spec: agentic_checkout](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.agentic_checkout.md)
+- [Delegate Payment](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.delegate_payment.md)
+- [Payment Handlers](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.payment_handlers.md)
+- [OpenAPI specs](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/tree/main/spec/2026-01-30/openapi)
 
 *Last verified: 2026-03-31*

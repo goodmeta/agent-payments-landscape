@@ -48,9 +48,9 @@ Settlement layer using HTTP 402 with a challenge/credential/receipt flow. Like x
 
 ## Sources
 
-- Core spec: `specs/core/draft-httpauth-payment-00.md`
-- Charge intent: `specs/intents/draft-payment-intent-charge-00.md`
-- Methods: `specs/methods/` (tempo, stripe, lightning, card, solana, stellar)
-- MCP transport: `specs/extensions/transports/draft-payment-transport-mcp-00.md`
+- [Core spec](https://github.com/tempoxyz/mpp-specs/blob/main/specs/core/draft-httpauth-payment-00.md)
+- [Charge intent](https://github.com/tempoxyz/mpp-specs/blob/main/specs/intents/draft-payment-intent-charge-00.md)
+- [Payment methods](https://github.com/tempoxyz/mpp-specs/tree/main/specs/methods)
+- [MCP transport](https://github.com/tempoxyz/mpp-specs/blob/main/specs/extensions/transports/draft-payment-transport-mcp-00.md)
 
 *Last verified: 2026-03-31*
