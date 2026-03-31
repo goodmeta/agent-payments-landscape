@@ -23,26 +23,26 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    COMMERCE LAYER                        │
+│                    COMMERCE LAYER                       │
 │                                                         │
 │   ACP (OpenAI+Stripe)          UCP (Google+Shopify)     │
 │   REST checkout sessions       Multi-transport commerce │
 │   Delegate payment tokens      AP2 mandates extension   │
 │                                                         │
 ├─────────────────────────────────────────────────────────┤
-│                  AUTHORIZATION LAYER                     │
+│                  AUTHORIZATION LAYER                    │
 │                                                         │
-│                    AP2 (Google)                          │
+│                    AP2 (Google)                         │
 │          IntentMandate → CartMandate → PaymentMandate   │
 │          Cryptographic signing, VDCs, accountability    │
 │                                                         │
 ├─────────────────────────────────────────────────────────┤
-│                   SETTLEMENT LAYER                       │
+│                   SETTLEMENT LAYER                      │
 │                                                         │
 │   x402 (Coinbase)              MPP (Tempo+Stripe)       │
 │   HTTP 402 + stablecoin        HTTP 402 + multi-rail    │
 │   EIP-3009 permits             Challenge/credential/    │
-│   Per-request micropayments    receipt flow              │
+│   Per-request micropayments    receipt flow             │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
