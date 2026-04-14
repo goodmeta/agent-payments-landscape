@@ -2,7 +2,7 @@
 
 **Creator:** Google (with Shopify contributions)
 **Repo:** [github.com/Universal-Commerce-Protocol/ucp](https://github.com/Universal-Commerce-Protocol/ucp)
-**Version:** Pre-release draft (date-based versioning, no release tags yet)
+**Version:** v2026-04-08 (first tagged release, Apr 9)
 **License:** Apache 2.0
 **Docs:** ucp.dev
 
@@ -32,9 +32,23 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 - Settlement (delegates to payment handlers and underlying rails)
 - Its own delegation model (uses AP2 mandates, not its own)
 
+## Endorsed Partners
+
+Block, Fiserv, Klarna, Splitit, Affirm, Checkout.com (added in v2026-04-08 release cycle), plus original partners including Shopify.
+
 ## Live Deployment
 
 UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, Jan 2026). First retailers: Etsy, Wayfair. Coming: Shopify, Target, Walmart. Google charges 0% transaction fees (for now).
+
+## Recent Changes (since Mar 31)
+
+- **v2026-04-08 release** (Apr 9) — first tagged release
+- **New endorsed partners:** Block, Fiserv, Klarna, Splitit, Affirm, Checkout.com
+- **`currency` required** on Order schema
+- **Get Order operation** added with platform-auth
+- **Embedded protocol transport binding** for cart capability + reauth in ECP
+- **`get_product` operation** added to `catalog.lookup`
+- **Identity linking redesign** (#265) merged then reverted — likely continuing on a branch
 
 ## Relationship to Other Protocols
 
@@ -50,4 +64,4 @@ UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, J
 - [MCP checkout binding](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/checkout-mcp.md)
 - [Payment handler guide](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/payment-handler-guide.md)
 
-*Last verified: 2026-03-31*
+*Last verified: 2026-04-14*

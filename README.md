@@ -8,10 +8,10 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 
 | Dimension | AP2 | ACP | x402 | MPP | UCP |
 |-----------|-----|-----|------|-----|-----|
-| **Creator** | Google | OpenAI + Stripe | Coinbase | Tempo Labs + Stripe | Google (+ Shopify) |
-| **Maturity** | V0.1 (spec + samples) | Beta (4 releases) | V2 (production SDKs) | IETF draft-00 | Pre-release draft |
+| **Creator** | Google | OpenAI + Stripe | Coinbase (now x402 Foundation) | Tempo Labs + Stripe | Google (+ Shopify) |
+| **Maturity** | V0.1 (spec + samples) | Beta (4 releases) | V2 (production SDKs, Go v2.9.0) | IETF draft-00 | v2026-04-08 (first tagged release) |
 | **Layer** | Authorization | Commerce (checkout) | Settlement | Settlement | Commerce (full-stack) |
-| **Payment Rails** | Cards (v0.1); all rails planned for v1.x | Cards (delegate payment tokens) | Stablecoins (Base, Ethereum, Polygon, Solana, Algorand, Aptos, Hedera, Stellar, Sui) | Multi-rail (Tempo stablecoins, Stripe cards, Lightning, Solana, Stellar) | Rail-agnostic (pluggable payment handlers) |
+| **Payment Rails** | Cards (v0.1); all rails planned for v1.x | Cards (delegate payment tokens) + Razorpay UPI/S2S (proposed SEPs) | Stablecoins (Base, Ethereum, Polygon, Solana, Algorand, Aptos, Hedera, Stellar, Sui, Keeta) | Multi-rail (Tempo stablecoins, Stripe cards, Lightning, Solana, Stellar) + EVM unified, TON, Initia (draft PRs) | Rail-agnostic (pluggable payment handlers) |
 | **Agent Delegation** | Yes. Three mandate types: IntentMandate, CartMandate, PaymentMandate [1] | Yes. Delegate Payment API with Allowance constraints [2] | No (explicitly out of scope) [3] | No [4] | Yes (via AP2 mandates extension) [5] |
 | **Budget / Spending Limits** | Yes. IntentMandate constraints (natural language + merchant/SKU allowlists + expiry) [1] | Yes. Allowance object: max_amount, currency, expires_at, scoped to merchant_id [2] | No (explicitly out of scope) [3] | No [4] | Yes (inherited from AP2 mandates) [5] |
 | **Cross-Merchant Coordination** | Not yet. Roadmap: "multi-merchant transaction topologies" [6] | Not found in spec | No | No | Not found in spec |
@@ -67,7 +67,7 @@ See individual protocol pages for deeper analysis:
 
 [2] ACP `rfcs/rfc.delegate_payment.md` Section 3.5 (Allowance schema) — [github.com/agentic-commerce-protocol/agentic-commerce-protocol](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol)
 
-[3] x402 spec "Document Scope" — explicitly lists "Client-side budget management" as out of scope — [github.com/coinbase/x402](https://github.com/coinbase/x402)
+[3] x402 spec "Document Scope" — explicitly lists "Client-side budget management" as out of scope — [github.com/x402-foundation/x402](https://github.com/x402-foundation/x402)
 
 [4] MPP core spec `draft-httpauth-payment-00.md` — no delegation or budget concepts — [github.com/tempoxyz/mpp-specs](https://github.com/tempoxyz/mpp-specs)
 
@@ -75,7 +75,7 @@ See individual protocol pages for deeper analysis:
 
 [6] AP2 `docs/roadmap.md` — V1.x and Long-Term Vision sections
 
-[7] x402 `specs/transports-v2/mcp.md` — MCP transport specification
+[7] x402 `specs/transports-v2/mcp.md` — MCP transport specification — [github.com/x402-foundation/x402](https://github.com/x402-foundation/x402)
 
 [8] MPP `specs/extensions/transports/draft-payment-transport-mcp-00.md` — MCP transport binding
 
@@ -89,4 +89,4 @@ Found an error? Protocol shipped an update? Open an issue or PR. Every claim mus
 
 Maintained by [Eric Tsang](https://linkedin.com/in/erictsang). I build agent payment infrastructure across AP2, x402, MPP, and MCP.
 
-*Last verified: 2026-03-31*
+*Last verified: 2026-04-14*

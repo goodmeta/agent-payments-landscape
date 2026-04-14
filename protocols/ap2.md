@@ -41,6 +41,16 @@ Three mandate types form a chain:
 - [#150](https://github.com/google-agentic-commerce/AP2/issues/150) — Security inconsistencies between spec and implementation (no signature fields in code)
 - [#133](https://github.com/google-agentic-commerce/AP2/issues/133) — Standardized budget limitation field
 - [#207](https://github.com/google-agentic-commerce/AP2/issues/207) — Cross-merchant budget enforcement
+- [#211](https://github.com/google-agentic-commerce/AP2/issues/211) — CartMandate/PaymentMandate binding gap (cart contents not re-verified at final confirmation)
+- [#214](https://github.com/google-agentic-commerce/AP2/issues/214) — AP2/A2A challenge flow underdefined at contract layer
+- [#215](https://github.com/google-agentic-commerce/AP2/issues/215) — Human-present approval chain underdefined
+
+## Recent Activity (since Mar 31)
+
+- **Community contributions:** Ghost Protocol bounty (#216, autonomous infra mandate scenario), crypto-algo/v1 extension (#218, Algorand/VOI on-chain USDC)
+- **Discord community** launched (#217)
+- **Doc gaps flagged:** human-present approval chain (#215) and A2A challenge flow (#214) both underdefined
+- **No spec changes merged to main** — still at V0.1
 
 ## Relationship to Other Protocols
 
@@ -55,4 +65,4 @@ Three mandate types form a chain:
 - [Roadmap](https://github.com/google-agentic-commerce/AP2/blob/main/docs/roadmap.md)
 - [A2A extension](https://github.com/google-agentic-commerce/AP2/blob/main/docs/a2a-extension.md)
 
-*Last verified: 2026-03-31*
+*Last verified: 2026-04-14*

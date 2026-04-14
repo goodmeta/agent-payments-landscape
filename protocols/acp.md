@@ -4,7 +4,7 @@
 **Repo:** [github.com/agentic-commerce-protocol/agentic-commerce-protocol](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol)
 **Version:** Beta (4 releases: 2025-09-29, 2025-12-12, 2026-01-16, 2026-01-30)
 **License:** Apache 2.0 (CLA required)
-**Signatories:** Stripe, OpenAI, Adyen, Wix, commercetools, OpenCommerce Network, Affirm, Meta Platforms
+**Signatories:** Stripe, OpenAI, Adyen, Wix, commercetools, OpenCommerce Network, Affirm, Meta Platforms, Razorpay
 
 ## What It Is
 
@@ -31,6 +31,13 @@ Commerce checkout layer for AI agent shopping flows. Defines REST APIs for creat
 - Settlement (relies on merchant's existing PSP)
 - Mandate-style cryptographic authorization (uses delegate tokens, not signed mandates)
 
+## Recent Changes (since Mar 31)
+
+- **TSC Operating Model** — `docs/operating-model.md` added. Weekly meeting cadence (Thursdays), triage rotation, SEP lifecycle, quarterly membership review.
+- **Razorpay SEPs** — 5 India payment handler proposals: UPI Intent, UPI Circle Delegated, S2S Cards, Reserve Pay, Magic Checkout (PRs #213-218, Apr 6-12)
+- **Feed Extensions Framework** — new SEP for product feed extensibility (Apr 14)
+- **`risk_signals` relaxation** — empty arrays now allowed (driven by Braintree/PayPal production discovery, Apr 9)
+
 ## Relationship to Other Protocols
 
 - **Competes with UCP** at the commerce layer (OpenAI+Stripe vs Google+Shopify)
@@ -44,4 +51,4 @@ Commerce checkout layer for AI agent shopping flows. Defines REST APIs for creat
 - [Payment Handlers](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.payment_handlers.md)
 - [OpenAPI specs](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/tree/main/spec/2026-01-30/openapi)
 
-*Last verified: 2026-03-31*
+*Last verified: 2026-04-14*

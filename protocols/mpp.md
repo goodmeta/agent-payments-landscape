@@ -15,14 +15,16 @@ Settlement layer using HTTP 402 with a challenge/credential/receipt flow. Like x
 - **Challenge** — server returns 402 with `WWW-Authenticate: Payment` specifying intent, amount, method
 - **Credential** — client signs and returns payment proof in `Authorization: Payment` header
 - **Receipt** — server confirms settlement in `Payment-Receipt` response header
-- **Intents** — the type of payment. Only `charge` (one-time) is formalized on main. `authorize`, `subscription`, and `session/stream` exist on branches.
-- **Methods** — payment rail implementations: Tempo, Stripe, Lightning, Card, Solana, Stellar
+- **Accept-Payment** — client-side header (modeled on `Accept-Language`) declaring supported payment methods and preferences. Reduces wasted server computation. Merged Apr 13.
+- **Intents** — the type of payment. Only `charge` (one-time) is formalized on main. `authorize`, `subscription`, and `session/stream` in active draft PRs.
+- **Methods** — payment rail implementations: Tempo, Stripe, Lightning, Card, Solana, Stellar. Unified EVM charge, TON NanoPay, and Initia methods in draft PRs.
 - **Extensions** — discovery (OpenAPI), MCP transport, community extensions
 
 ## What It Covers
 
 - Per-request payments (charge intent)
-- Multi-rail settlement (6 payment methods)
+- Client payment method negotiation (`Accept-Payment` header)
+- Multi-rail settlement (6+ payment methods, more in draft)
 - MCP transport binding (pay-per-tool-call)
 - Split payments (multi-recipient in single charge)
 - Service discovery via OpenAPI
@@ -34,11 +36,14 @@ Settlement layer using HTTP 402 with a challenge/credential/receipt flow. Like x
 - Cross-service spending coordination
 - Authorize/subscription/session intents (in development on branches, not merged)
 
-## In Development (on branches, not merged)
+## In Development (draft PRs, not merged)
 
-- `add-authorize-intent` — pre-authorization with spending caps and delayed capture
-- `add-subscription-intent` — recurring periodic charges
-- `add-tempo-stream` — pay-per-token streaming
+- **Authorization intent** ([PR #226](https://github.com/tempoxyz/mpp-specs/pull/226)) — pre-authorization with spending caps and delayed capture
+- **Subscription intent** ([PR #230](https://github.com/tempoxyz/mpp-specs/pull/230)) — recurring periodic charges
+- **EVM session** ([PR #225](https://github.com/tempoxyz/mpp-specs/pull/225)) — streaming payment channels, voucher-based, EIP-712 signatures, escrow contract
+- **WebSocket transport** ([PR #212](https://github.com/tempoxyz/mpp-specs/pull/212)) — session intent over JSON-RPC 2.0 / WebSocket
+- **Security guidance** ([PR #233](https://github.com/tempoxyz/mpp-specs/pull/233)) — challenge-binding secrets, rotation overlap
+- **New chain methods** — Unified EVM charge (#213), TON NanoPay (#214), Initia (#222)
 
 ## Relationship to Other Protocols
 
@@ -53,4 +58,4 @@ Settlement layer using HTTP 402 with a challenge/credential/receipt flow. Like x
 - [Payment methods](https://github.com/tempoxyz/mpp-specs/tree/main/specs/methods)
 - [MCP transport](https://github.com/tempoxyz/mpp-specs/blob/main/specs/extensions/transports/draft-payment-transport-mcp-00.md)
 
-*Last verified: 2026-03-31*
+*Last verified: 2026-04-14*
