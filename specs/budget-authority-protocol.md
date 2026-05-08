@@ -60,12 +60,14 @@ The budget authority is rail-agnostic. It does not move money. It tracks how muc
 
 ### Credential Separation
 
-Budget creation requires a **principal credential** (the human or org setting the limit). Authorize/commit/refund require an **agent credential** (the agent spending within the limit). These MUST be different credentials. A compromised agent with the principal credential can create its own budgets — defeating the purpose.
+Budget creation requires a **principal credential**. Authorize/commit/refund require an **agent credential**. These MUST be different credentials. A spending agent with the principal credential can create its own budgets — defeating the purpose.
 
 | Operation | Credential | Holder |
 |-----------|-----------|--------|
-| create budget | principal key | Human, org, orchestrator |
+| create budget | principal key | The principal (see below) |
 | authorize, commit, refund, query | agent key | Spending agent |
+
+The **principal** is the entity authorized to set spending limits. The protocol does not define who qualifies as a principal — that is an implementation decision. A principal may be a human, an organization, or a pre-authorized orchestrating agent operating within its own parent budget. What matters is that the spending agent and the principal are never the same credential. Sub-allocation (a principal partitioning its budget into child budgets) is planned for v0.2.
 
 ## Verbs
 
@@ -172,7 +174,7 @@ Implementations SHOULD retain expired hold records for at least 24 hours to allo
 
 ## Budget Creation
 
-Budgets are created by the principal (human or orchestrating agent), not by the spending agent. The creation endpoint requires a principal credential distinct from the agent credential.
+Budgets are created by the principal, not by the spending agent. The creation endpoint requires a principal credential distinct from the agent credential.
 
 ```
 Request:
