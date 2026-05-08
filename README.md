@@ -51,6 +51,12 @@ ACP and UCP are alternatives at the commerce layer. AP2 is the authorization lay
 
 **The gap nobody fills:** cross-protocol budget tracking. An agent that shops via UCP, pays for APIs via MPP, and settles via x402 has no unified spending verification across all three. Each protocol tracks its own transactions in isolation.
 
+## Budget Authority Protocol (Draft)
+
+The [Budget Authority Protocol](specs/budget-authority-protocol.md) formalizes a spending enforcement layer that sits between authorization and settlement. Four verbs (`authorize`, `commit`, `refund`, `query`), one budget, any payment rail.
+
+This pattern emerged independently across AP2, x402, MPP, OpenClaw, and ACP communities in April–May 2026. The spec documents the convergence.
+
 ## Protocol Details
 
 See individual protocol pages for deeper analysis:
