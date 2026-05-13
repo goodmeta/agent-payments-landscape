@@ -1,6 +1,10 @@
-# Budget Authority Protocol — v0.1 (Draft)
+# Budget Reservation Protocol — v0.1 (Draft)
 
-A minimal protocol for cross-service agent spending enforcement. Four verbs. One budget. Any payment rail.
+A minimal protocol for cross-service agent spending enforcement. One budget. Any payment rail.
+
+> **Canonical crosswalk:** [aeoess/agent-governance-vocabulary#91](https://github.com/aeoess/agent-governance-vocabulary/pull/91) registers `budget_reservation` as the canonical namespace with a six-verb interface (`reserve / commit / release / refund / query_budget / query_reservation`). This v0.1 document describes a four-verb subset (`authorize / commit / refund / query`) implemented in [google-agentic-commerce/AP2#252](https://github.com/google-agentic-commerce/AP2/pull/252). A v0.2 alignment pass — renaming `authorize → reserve`, separating `release` (pre-commit return) from `refund` (post-commit reversal), and splitting `query → query_budget` + `query_reservation` — will follow once AP2#252 merges.
+>
+> Previous name: titled "Budget Authority Protocol" through v0.1; renamed to "Budget Reservation Protocol" on 2026-05-14 per aeoess/agent-governance-vocabulary#91 to avoid namespace overlap with the Agent Passport System's delegation-authority layer.
 
 ## The Three Layers
 
@@ -10,7 +14,7 @@ A minimal protocol for cross-service agent spending enforcement. Four verbs. One
 │  AP2 mandates, Agent Passport System, ERC-8004      │
 │  "Who authorized this agent?"                       │
 ├─────────────────────────────────────────────────────┤
-│  Budget Authority (this spec)                       │
+│  Budget Reservation (this spec)                       │
 │  "Is this spend within the authorized limit?"       │
 ├─────────────────────────────────────────────────────┤
 │  Settlement                                         │
@@ -30,7 +34,7 @@ Five agent payment protocols exist (AP2, ACP, x402, MPP, UCP). Each handles sett
 
 On May 4, 2026, this became tangible: an AI agent on Base lost $115K through a prompt injection attack (Bankr incident). The model was tricked into authorizing a transfer. No spending limit existed between the model's decision and the payment execution.
 
-The budget authority sits between the agent and the payment rail. Even if the agent is compromised, spending is bounded.
+The budget reservation layer sits between the agent and the payment rail. Even if the agent is compromised, spending is bounded.
 
 ## Architecture
 
@@ -53,10 +57,10 @@ Agent ───┤
   │      └── refund(hold_id) → released
   │            [on payment failure]
   │
-Budget Authority (stateful, single source of truth)
+Budget Reservation Layer (stateful, single source of truth)
 ```
 
-The budget authority is rail-agnostic. It does not move money. It tracks how much has been authorized, held, committed, and refunded against a budget. The payment rail handles settlement independently.
+The budget reservation layer is rail-agnostic. It does not move money. It tracks how much has been authorized, held, committed, and refunded against a budget. The payment rail handles settlement independently.
 
 ### Credential Separation
 
