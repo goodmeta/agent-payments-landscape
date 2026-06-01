@@ -1,10 +1,10 @@
 # AP2 — Agent Payments Protocol
 
-**Creator:** Google
-**Repo:** [github.com/google-agentic-commerce/AP2](https://github.com/google-agentic-commerce/AP2)
-**Version:** V0.1 (spec + Python/Go samples, Android SDK planned)
+**Creator:** Google (core spec donated to the FIDO Alliance, 2026-04-28)
+**Repo:** [github.com/google-agentic-commerce/AP2](https://github.com/google-agentic-commerce/AP2) (now samples + SDK only; spec development moved to FIDO)
+**Version:** v0.2.0 (2026-04-28) — adds Human-Not-Present flows, Python SDK, Android samples
 **License:** Apache 2.0
-**Partners:** 125 listed in `docs/partners.md` (Mastercard, Visa, Amex, PayPal, Shopify, Stripe, Coinbase, Adyen, Klarna, etc.)
+**Governance:** FIDO Alliance Payments Technical Working Group (chaired by Mastercard + Visa members) develops the spec going forward
 
 ## What It Is
 
@@ -12,13 +12,13 @@ Authorization and accountability layer for agent-initiated purchases. AP2 doesn'
 
 ## Core Concepts
 
-Three mandate types form a chain:
+The v0.2 spec defines two mandate types, each with a "closed" (direct human approval) and "open" (Human-Not-Present, pre-authorized constraints) form:
 
-1. **IntentMandate** — what the user wants ("buy red shoes under $200"). Signed by the user's device key. Contains natural language description, merchant allowlist, SKU constraints, expiry.
+1. **Checkout Mandate** — what the user authorizes for a purchase (merchant, items, constraints). In the open form, carries pre-authorized constraints for autonomous purchases.
 
-2. **CartMandate** — what the merchant is offering. Signed by the merchant (JWT). Contains specific items, prices, shipping. The user approves by signing a hash of the CartMandate in the PaymentMandate.
+2. **Payment Mandate** — authorization to charge, bound to the checkout. Carries a structured `budget` constraint (`max` amount + `currency`) plus recurrence rules. Shared with payment networks/issuers alongside standard transaction auth messages.
 
-3. **PaymentMandate** — authorization to charge. Contains payment details, bound to the CartMandate hash. Shared with payment networks/issuers alongside standard transaction auth messages.
+(The earlier IntentMandate / CartMandate / PaymentMandate naming from v0.1 survives only in the Python sample models, not the v0.2 spec text.)
 
 ## What It Covers
 
@@ -30,11 +30,9 @@ Three mandate types form a chain:
 
 ## What It Doesn't Cover (Yet)
 
-- Cross-merchant budget enforcement (roadmap: "multi-merchant transaction topologies")
-- Mandate **verification** utilities (spec describes the model, no verification code exists)
-- MCP integration (planned for v1.x)
-- Push payments, real-time transfers, e-wallets (planned for v1.x)
-- Budget as a structured field (discussed in Issue #133, not yet added)
+- Cross-merchant budget enforcement (a single-mandate `budget` field now exists, but cross-merchant coordination does not — Issue #207)
+- A production verification SDK (v0.2 ships sample MCP servers for every role; the FAQ notes a production SDK + MCP server are still "in progress")
+- Push payments, real-time transfers, e-wallets
 
 ## Key Open Issues
 
@@ -45,12 +43,13 @@ Three mandate types form a chain:
 - [#214](https://github.com/google-agentic-commerce/AP2/issues/214) — AP2/A2A challenge flow underdefined at contract layer
 - [#215](https://github.com/google-agentic-commerce/AP2/issues/215) — Human-present approval chain underdefined
 
-## Recent Activity (since Mar 31)
+## Recent Activity (since 2026-04-14)
 
-- **Community contributions:** Ghost Protocol bounty (#216, autonomous infra mandate scenario), crypto-algo/v1 extension (#218, Algorand/VOI on-chain USDC)
-- **Discord community** launched (#217)
-- **Doc gaps flagged:** human-present approval chain (#215) and A2A challenge flow (#214) both underdefined
-- **No spec changes merged to main** — still at V0.1
+- **v0.2.0 released (2026-04-28)** — Human-Not-Present flows specified; Python SDK shipped (`code/sdk/python/`); Android samples added; structured `budget` constraint added to the spec + JSON schema
+- **Core spec donated to the FIDO Alliance (2026-04-28)** — a new FIDO Payments Technical Working Group (chaired by Mastercard + Visa members) takes over spec development; Mastercard's "Verifiable Intent" framework co-donated
+- **MCP sample servers shipped** for all AP2 roles (credentials provider, merchant agent, payment processor, x402 variants)
+- **AP2 + x402 Human-Not-Present scenario** added as runnable sample code
+- **CONTRIBUTING.md** now scopes the GitHub repo to samples + SDK only; spec contributions go to FIDO
 
 ## Relationship to Other Protocols
 
@@ -60,9 +59,9 @@ Three mandate types form a chain:
 
 ## Sources
 
-- [Specification](https://github.com/google-agentic-commerce/AP2/blob/main/docs/specification.md)
-- [Mandate types (Python)](https://github.com/google-agentic-commerce/AP2/blob/main/src/ap2/types/mandate.py)
-- [Roadmap](https://github.com/google-agentic-commerce/AP2/blob/main/docs/roadmap.md)
-- [A2A extension](https://github.com/google-agentic-commerce/AP2/blob/main/docs/a2a-extension.md)
+- [Specification (v0.2)](https://github.com/google-agentic-commerce/AP2/blob/main/docs/ap2/specification.md)
+- [Payment Mandate + budget](https://github.com/google-agentic-commerce/AP2/blob/main/docs/ap2/payment_mandate.md)
+- [Mandate models (Python SDK)](https://github.com/google-agentic-commerce/AP2/blob/main/code/sdk/python/ap2/models/mandate.py)
+- [FIDO Alliance announcement](https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/)
 
-*Last verified: 2026-04-14*
+*Last verified: 2026-06-01*

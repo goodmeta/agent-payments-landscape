@@ -1,10 +1,10 @@
 # ACP — Agentic Commerce Protocol
 
-**Creator:** OpenAI + Stripe (co-maintained)
+**Creator:** OpenAI + Stripe (Founding Maintainers, with veto) + Meta (TSC member since 2026-04-24)
 **Repo:** [github.com/agentic-commerce-protocol/agentic-commerce-protocol](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol)
-**Version:** Beta (4 releases: 2025-09-29, 2025-12-12, 2026-01-16, 2026-01-30)
+**Version:** Beta (5 releases, latest 2026-04-17)
 **License:** Apache 2.0 (CLA required)
-**Signatories:** Stripe, OpenAI, Adyen, Wix, commercetools, OpenCommerce Network, Affirm, Meta Platforms, Razorpay
+**Signatories:** Stripe, OpenAI, Adyen, Wix, commercetools, OpenCommerce Network, Affirm, Meta Platforms, PayPal, Agentic Commerce Inc. (Catalog). Razorpay is *not* a signatory (it has open SEP proposals only).
 
 ## What It Is
 
@@ -22,21 +22,23 @@ Commerce checkout layer for AI agent shopping flows. Defines REST APIs for creat
 - Full checkout lifecycle (session management, cart updates, fulfillment)
 - Delegate payment tokenization with Allowance constraints
 - Capability negotiation between agents and merchants
-- Extensions system (discounts, payment handlers)
+- MCP transport binding (5 checkout tools over JSON-RPC, merged 2026-02-19)
+- Extensions system (discounts, payment handlers, product feed)
 
 ## What It Doesn't Cover
 
 - Cross-merchant coordination (Allowance is scoped to single merchant_id)
-- MCP integration (REST-only, no MCP transport binding)
 - Settlement (relies on merchant's existing PSP)
 - Mandate-style cryptographic authorization (uses delegate tokens, not signed mandates)
 
-## Recent Changes (since Mar 31)
+## Recent Changes (since 2026-04-14)
 
-- **TSC Operating Model** — `docs/operating-model.md` added. Weekly meeting cadence (Thursdays), triage rotation, SEP lifecycle, quarterly membership review.
-- **Razorpay SEPs** — 5 India payment handler proposals: UPI Intent, UPI Circle Delegated, S2S Cards, Reserve Pay, Magic Checkout (PRs #213-218, Apr 6-12)
-- **Feed Extensions Framework** — new SEP for product feed extensibility (Apr 14)
-- **`risk_signals` relaxation** — empty arrays now allowed (driven by Braintree/PayPal production discovery, Apr 9)
+- **2026-04-17 release** (5th versioned release) — promoted the MCP transport binding, Feed API, Cart Capability, Marketing Consent, and Markdown Specification SEPs
+- **Meta joined the TSC (2026-04-24)** — Seat 3, alongside OpenAI (Seat 1) and Stripe (Seat 2); **PayPal signed the CLA (2026-04-16)**
+- **Razorpay SEPs** — India payment handlers (Magic Checkout, UPI Circle Delegated, UPI Intent, S2S Cards) are open PRs #215–218; the original PR #213 was closed without merge (not yet shipped)
+- **Fulfillment-on-complete (#200)** and **suggested-pricing-on-create (#201)** merged 2026-05-22
+- **Feed Extensions Framework** (PR #223) still an open SEP — distinct from the Feed API, which did merge
+- **`risk_signals` relaxation** — empty arrays now allowed (Braintree/PayPal production discovery, Apr 9)
 
 ## Relationship to Other Protocols
 
@@ -49,6 +51,7 @@ Commerce checkout layer for AI agent shopping flows. Defines REST APIs for creat
 - [Spec: agentic_checkout](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.agentic_checkout.md)
 - [Delegate Payment](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.delegate_payment.md)
 - [Payment Handlers](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/rfcs/rfc.payment_handlers.md)
-- [OpenAPI specs](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/tree/main/spec/2026-01-30/openapi)
+- [MCP transport binding](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/docs/mcp-binding.md)
+- [Governance / MAINTAINERS](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/MAINTAINERS.md)
 
-*Last verified: 2026-04-14*
+*Last verified: 2026-06-01*

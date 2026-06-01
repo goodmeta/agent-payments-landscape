@@ -1,8 +1,8 @@
 # UCP — Universal Commerce Protocol
 
-**Creator:** Google (with Shopify contributions)
-**Repo:** [github.com/Universal-Commerce-Protocol/ucp](https://github.com/Universal-Commerce-Protocol/ucp)
-**Version:** v2026-04-08 (first tagged release, Apr 9)
+**Creator:** Co-governed open standard (`ucp.dev`); co-developers include Google, Shopify, Etsy, Walmart, Amazon, Microsoft, Meta, Salesforce, Stripe + lodging/food brands
+**Repo:** [github.com/Universal-Commerce-Protocol/ucp](https://github.com/Universal-Commerce-Protocol/ucp) (independent org, not Google-owned)
+**Version:** v2026-04-08 (latest tagged release; the first was v2026-01-11)
 **License:** Apache 2.0
 **Docs:** ucp.dev
 
@@ -12,19 +12,19 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 
 ## Core Concepts
 
-- **Capabilities** — modular features a merchant can expose: Checkout, Identity Linking, Order, Payment Token Exchange
-- **Extensions** — optional add-ons: Discounts, Fulfillment, AP2 Mandates
+- **Capabilities** — modular features a merchant can expose: Cart, Catalog, Checkout, Identity Linking, Order
+- **Extensions** — optional add-ons: Discounts, Fulfillment, Buyer Consent, Loyalty, Split Payments, AP2 Mandates
 - **Payment Handlers** — pluggable payment methods (Google Pay, Shop Pay, cards). Rail-agnostic.
 - **AP2 Mandates Extension** — when negotiated, checkout becomes "Security Locked" with cryptographic mandate binding
-- **Multi-transport** — same protocol over REST, MCP tool calls, or A2A agent delegation
+- **Multi-transport** — same protocol over REST, MCP tool calls, A2A agent delegation, or the Embedded Protocol (OpenRPC)
 
 ## What It Covers
 
-- Full checkout lifecycle with multi-transport support
+- Full checkout lifecycle with multi-transport support (REST, MCP, A2A, Embedded Protocol)
 - AP2 mandate integration (authorization layer built in)
 - Payment handler framework (any rail)
-- MCP binding (tool calls for create_checkout, update_checkout, etc.)
-- A2A binding (agent-to-agent commerce)
+- MCP bindings for both checkout and cart capabilities
+- Loyalty, Split Payments, and Buyer Consent extensions
 
 ## What It Doesn't Cover
 
@@ -34,21 +34,20 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 
 ## Endorsed Partners
 
-Block, Fiserv, Klarna, Splitit, Affirm, Checkout.com (added in v2026-04-08 release cycle), plus original partners including Shopify.
+~70+ endorsed partners listed on ucp.dev, including Visa, Mastercard, PayPal, Adyen, Worldpay, Klarna, Affirm, Block, Fiserv, Checkout.com, Splitit, plus retailers (The Home Depot, Best Buy, Kroger, Macy's, Sephora, Ulta, Gap, Zalando) and travel/food brands. (Was ~6 at last verification.)
 
 ## Live Deployment
 
-UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, Jan 2026). First retailers: Etsy, Wayfair. Coming: Shopify, Target, Walmart. Google charges 0% transaction fees (for now).
+UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, Jan 2026). The first live retailers (Jan 2026) were **Lowe's, Michael's, Poshmark, and Reebok** — Etsy and Wayfair are co-developers of the standard, not first live retailers. At Google Marketing Live (May 2026), Target, Walmart, Wayfair, Nike, Sephora, and Ulta were named for near-term checkout rollout, with expansion to Canada, Australia, and the UK.
 
-## Recent Changes (since Mar 31)
+## Recent Changes (since 2026-04-14)
 
-- **v2026-04-08 release** (Apr 9) — first tagged release
-- **New endorsed partners:** Block, Fiserv, Klarna, Splitit, Affirm, Checkout.com
-- **`currency` required** on Order schema
-- **Get Order operation** added with platform-auth
-- **Embedded protocol transport binding** for cart capability + reauth in ECP
-- **`get_product` operation** added to `catalog.lookup`
-- **Identity linking redesign** (#265) merged then reverted — likely continuing on a branch
+- **Loyalty extension** merged (2026-05-19) — tier recognition, member benefits, rewards across catalog/cart/checkout
+- **Split Payments extension** merged (2026-05-23) — multi-instrument checkout (cards, gift cards, store credit, loyalty)
+- **Universal Cart announced** (2026-05-19) — cross-merchant agentic shopping hub across Search, Gemini, YouTube, Gmail; US rollout "this summer"
+- **Vertical expansion** announced to Lodging (Amadeus, Booking.com, Hilton, Marriott, Expedia) and Food (DoorDash, Square, Toast, Uber Eats); specs pending
+- **Google Marketing Live 2026** (2026-05-20) — checkout expansion to CA/AU/UK, YouTube integration
+- **Partner page overhaul** (2026-05-19) — ~70+ endorsed partner logos added
 
 ## Relationship to Other Protocols
 
@@ -63,5 +62,6 @@ UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, J
 - [AP2 mandates extension](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/ap2-mandates.md)
 - [MCP checkout binding](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/checkout-mcp.md)
 - [Payment handler guide](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/payment-handler-guide.md)
+- [ucp.dev (partners, co-developers)](https://ucp.dev)
 
-*Last verified: 2026-04-14*
+*Last verified: 2026-06-01*
