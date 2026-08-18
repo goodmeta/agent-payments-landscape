@@ -9,11 +9,11 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 | Dimension | AP2 | ACP | x402 | MPP | UCP |
 |-----------|-----|-----|------|-----|-----|
 | **Creator** | Google (spec → FIDO Alliance) | OpenAI + Stripe + Meta | Coinbase (now x402 Foundation) | Tempo Labs + Stripe | Co-governed (Google, Shopify + many) |
-| **Maturity** | v0.2.0 (spec + Python SDK) | Beta (5 releases) | V2 (SDKs v2.14.0; +Java) | IETF draft-01 | v2026-04-08 (latest tagged) |
+| **Maturity** | v0.2.0 (spec + Python SDK) | Beta (5 releases) | V2 (SDKs: TS v2.22.0, Go v2.22.0, Python v2.19.0) | IETF draft-01 | v2026-04-08 (latest tagged) |
 | **Layer** | Authorization | Commerce (checkout) | Settlement | Settlement | Commerce (full-stack) |
-| **Payment Rails** | Cards; all rails planned | Cards (delegate payment tokens); Razorpay UPI/S2S proposed (open SEPs) | Stablecoins on 14+ chains (Base, Ethereum, Polygon, Solana, Algorand, Aptos, Hedera, Stellar, Sui, Keeta, TON, NEAR, Cardano, Concordium) | Multi-rail: 8 method specs on main (Tempo, Stripe, Lightning, Card, Solana, Stellar, EVM, Hedera) | Rail-agnostic (pluggable payment handlers) |
+| **Payment Rails** | Cards; all rails planned | Cards (delegate payment tokens); Razorpay UPI/S2S proposed (open SEPs) | Stablecoins on 14+ chains (Base, Ethereum, Polygon, Solana, Algorand, Aptos, Hedera, Stellar, Sui, Keeta, TON, NEAR, Cardano, Concordium) | Multi-rail: 10 method specs on main (Tempo, Stripe, Lightning, Card, Solana, Stellar, EVM, Hedera, Near Intents, USDC) | Rail-agnostic (pluggable payment handlers) |
 | **Agent Delegation** | Yes. Two mandate types: Checkout Mandate + Payment Mandate [1] | Yes. Delegate Payment API with Allowance constraints [2] | No (explicitly out of scope) [3] | No [4] | Yes (via AP2 mandates extension) [5] |
-| **Budget / Spending Limits** | Yes. Payment Mandate `budget` field (max + currency), single-mandate [1] | Yes. Allowance object: max_amount, currency, expires_at, scoped to merchant_id [2] | No (explicitly out of scope) [3] | No [4] | Yes (inherited from AP2 mandates) [5] |
+| **Budget / Spending Limits** | Yes. Payment Mandate `budget` field (max + currency), single-mandate [1] | Yes. Allowance object: max_amount, currency, expires_at, scoped to merchant_id [2] | Not in the protocol (still out of scope [3]). TypeScript SDK only: `spendControls` per-payment USD cap + asset allowlist, no running total [10] | No [4] | Yes (inherited from AP2 mandates) [5] |
 | **Cross-Merchant Coordination** | Not yet (Issue #207) | Not found in spec | No | No | Not found in spec |
 | **Cross-Protocol Budget Tracking** | No | No | No | No | No |
 | **MCP Integration** | Sample servers shipped (all roles) [1] | Yes (transport binding, merged) [2] | Yes (transport spec) [7] | Yes (transport spec) [8] | Yes (checkout + cart bindings) [9] |
@@ -73,7 +73,7 @@ See individual protocol pages for deeper analysis:
 
 [2] ACP `rfcs/rfc.delegate_payment.md` Section 3.5 (Allowance schema) — [github.com/agentic-commerce-protocol/agentic-commerce-protocol](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol)
 
-[3] x402 spec "Document Scope" — explicitly lists "Client-side budget management" as out of scope — [github.com/x402-foundation/x402](https://github.com/x402-foundation/x402)
+[3] x402 `specs/x402-specification-v2.md` "Out of Scope" — still lists "Client-side budget management" as out of scope on main — [github.com/x402-foundation/x402](https://github.com/x402-foundation/x402/blob/main/specs/x402-specification-v2.md)
 
 [4] MPP core spec `draft-httpauth-payment-00.md` — no delegation or budget concepts — [github.com/tempoxyz/mpp-specs](https://github.com/tempoxyz/mpp-specs)
 
@@ -87,6 +87,8 @@ See individual protocol pages for deeper analysis:
 
 [9] UCP `docs/specification/checkout-mcp.md` — MCP checkout binding
 
+[10] x402 `docs/sdk-features.md` + buyer quickstart — `spendControls` client safety feature, TypeScript only (PR [#3124](https://github.com/x402-foundation/x402/pull/3124), [#3147](https://github.com/x402-foundation/x402/pull/3147), merged 2026-08-13)
+
 ## Contributing
 
 Found an error? Protocol shipped an update? Open an issue or PR. Every claim must cite a primary source (spec document, GitHub repo, official blog post).
@@ -95,4 +97,4 @@ Found an error? Protocol shipped an update? Open an issue or PR. Every claim mus
 
 Maintained by [Eric Tsang](https://linkedin.com/in/erictsang). I build agent payment infrastructure across AP2, x402, MPP, and MCP.
 
-*Last verified: 2026-06-01*
+*Last verified: x402, MPP, UCP — 2026-08-18. AP2, ACP — 2026-06-01.*

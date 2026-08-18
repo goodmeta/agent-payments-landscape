@@ -13,7 +13,7 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 ## Core Concepts
 
 - **Capabilities** — modular features a merchant can expose: Cart, Catalog, Checkout, Identity Linking, Order
-- **Extensions** — optional add-ons: Discounts, Fulfillment, Buyer Consent, Loyalty, Split Payments, AP2 Mandates
+- **Extensions** — optional add-ons: Discounts, Fulfillment, Buyer Consent, Loyalty, Split Payments, Payment Terms, AP2 Mandates
 - **Payment Handlers** — pluggable payment methods (Google Pay, Shop Pay, cards). Rail-agnostic.
 - **AP2 Mandates Extension** — when negotiated, checkout becomes "Security Locked" with cryptographic mandate binding
 - **Multi-transport** — same protocol over REST, MCP tool calls, A2A agent delegation, or the Embedded Protocol (OpenRPC)
@@ -24,10 +24,12 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 - AP2 mandate integration (authorization layer built in)
 - Payment handler framework (any rail)
 - MCP bindings for both checkout and cart capabilities
-- Loyalty, Split Payments, and Buyer Consent extensions
+- Loyalty, Split Payments, Buyer Consent, and Payment Terms extensions
+- Payment timing: deposits, balances, and fixed installment schedules (Payment Terms)
 
 ## What It Doesn't Cover
 
+- Recurring or subscription billing. Payment Terms carries fixed schedules with absolute RFC 3339 dates the merchant computed — there is no recurrence engine and no anchor arithmetic in the spec.
 - Cross-merchant transaction coordination (not found in current spec)
 - Settlement (delegates to payment handlers and underlying rails)
 - Its own delegation model (uses AP2 mandates, not its own)
@@ -40,7 +42,11 @@ Full-stack commerce orchestration layer. Defines capabilities (checkout, identit
 
 UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, Jan 2026). The first live retailers (Jan 2026) were **Lowe's, Michael's, Poshmark, and Reebok** — Etsy and Wayfair are co-developers of the standard, not first live retailers. At Google Marketing Live (May 2026), Target, Walmart, Wayfair, Nike, Sephora, and Ulta were named for near-term checkout rollout, with expansion to Canada, Australia, and the UK.
 
-## Recent Changes (since 2026-04-14)
+## Recent Changes (since 2026-06-01)
+
+- **Payment Terms extension** merged ([PR #602](https://github.com/Universal-Commerce-Protocol/ucp/pull/602), 2026-08-14) — `dev.ucp.shopping.payment_terms`. A merchant publishes the payment terms it accepts (pay in full, deposit plus balance, installments), the buyer selects one, and the merchant renegotiates the rest of checkout around it. Adds `payment.terms[]` and `payment.selected_term_id` on Checkout and `payment.accepted_term` on Order. Every date on the wire is an absolute RFC 3339 timestamp; no recurrence rules.
+
+## Earlier Changes (2026-04-14 to 2026-06-01)
 
 - **Loyalty extension** merged (2026-05-19) — tier recognition, member benefits, rewards across catalog/cart/checkout
 - **Split Payments extension** merged (2026-05-23) — multi-instrument checkout (cards, gift cards, store credit, loyalty)
@@ -60,8 +66,9 @@ UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, J
 
 - [Overview](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/overview.md)
 - [AP2 mandates extension](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/ap2-mandates.md)
+- [Payment Terms](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/payment-terms.md)
 - [MCP checkout binding](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/checkout-mcp.md)
 - [Payment handler guide](https://github.com/Universal-Commerce-Protocol/ucp/blob/main/docs/specification/payment-handler-guide.md)
 - [ucp.dev (partners, co-developers)](https://ucp.dev)
 
-*Last verified: 2026-06-01*
+*Last verified: 2026-08-18*
