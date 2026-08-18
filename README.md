@@ -9,7 +9,7 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 | Dimension | AP2 | ACP | x402 | MPP | UCP |
 |-----------|-----|-----|------|-----|-----|
 | **Creator** | Google (spec → FIDO Alliance) | OpenAI + Stripe + Meta | Coinbase (now x402 Foundation) | Tempo Labs + Stripe | Co-governed (Google, Shopify + many) |
-| **Maturity** | v0.2.0 (spec + Python SDK) | Beta (5 releases) | V2 (SDKs: TS v2.22.0, Go v2.22.0, Python v2.19.0) | IETF draft-01 | v2026-04-08 (latest tagged) |
+| **Maturity** | v0.2.0 (spec + Python SDK; repo unmerged since 2026-04-29) | Beta (5 releases, latest 2026-04-17) | V2 (SDKs: TS v2.22.0, Go v2.22.0, Python v2.19.0) | IETF draft-01 | v2026-04-08 (latest tagged) |
 | **Layer** | Authorization | Commerce (checkout) | Settlement | Settlement | Commerce (full-stack) |
 | **Payment Rails** | Cards; all rails planned | Cards (delegate payment tokens); Razorpay UPI/S2S proposed (open SEPs) | Stablecoins on 14+ chains (Base, Ethereum, Polygon, Solana, Algorand, Aptos, Hedera, Stellar, Sui, Keeta, TON, NEAR, Cardano, Concordium) | Multi-rail: 10 method specs on main (Tempo, Stripe, Lightning, Card, Solana, Stellar, EVM, Hedera, Near Intents, USDC) | Rail-agnostic (pluggable payment handlers) |
 | **Agent Delegation** | Yes. Two mandate types: Checkout Mandate + Payment Mandate [1] | Yes. Delegate Payment API with Allowance constraints [2] | No (explicitly out of scope) [3] | No [4] | Yes (via AP2 mandates extension) [5] |
@@ -97,4 +97,4 @@ Found an error? Protocol shipped an update? Open an issue or PR. Every claim mus
 
 Maintained by [Eric Tsang](https://linkedin.com/in/erictsang). I build agent payment infrastructure across AP2, x402, MPP, and MCP.
 
-*Last verified: x402, MPP, UCP — 2026-08-18. AP2, ACP — 2026-06-01.*
+*Last verified: 2026-08-18 (all five protocols).*
