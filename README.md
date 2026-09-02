@@ -99,8 +99,10 @@ See individual protocol pages for deeper analysis:
 
 Found an error? Protocol shipped an update? Open an issue or PR. Every claim must cite a primary source (spec document, GitHub repo, official blog post).
 
+**Editorial rule on implementations.** The matrix and the gap prose describe the five protocols and name no implementations — anyone's, the maintainer's included. A pattern earns prose here when several communities converge on it independently; a specific project earns a mention when one of the five protocols adopts it, or an unaffiliated organization ships an implementation. The Budget Reservation Protocol section below the gaps is maintainer-authored and is kept because it documents such a convergence; it is held to the same test as everything else.
+
 ## About
 
-Maintained by [Eric Tsang](https://linkedin.com/in/erictsang). I build agent payment infrastructure across AP2, x402, MPP, and MCP.
+Maintained by [Eric Tsang](https://linkedin.com/in/erictsang). I build agent payment infrastructure across AP2, x402, MPP, and MCP — and agent verification is the business I'm building, which gives me a commercial interest in the gaps this doc names. That interest is why the rule above exists: no implementations are named in the matrix or gap prose, mine included.
 
 *Last verified: 2026-08-18 (all five protocols).*
