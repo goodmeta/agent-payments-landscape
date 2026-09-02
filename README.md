@@ -50,15 +50,16 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 
 ACP and UCP are alternatives at the commerce layer. AP2 is the authorization layer that plugs into UCP (and could theoretically plug into ACP). x402 and MPP compete at settlement. AP2 sits above both and works regardless of which settlement protocol wins.
 
-**The gaps nobody fills.** An agent that shops via UCP, pays for APIs via MPP, and settles via x402 leaves two separate questions unanswered, and they are worth keeping apart.
+**The gaps nobody fills.** An agent that shops via UCP, pays for APIs via MPP, and settles via x402 leaves three separate questions unanswered, and they are worth keeping apart.
 
 *Cumulative spend across rails* is a rollup over history: what has this agent already spent, everywhere, against one limit. AP2 v0.2 added a single-mandate `budget` field (max + currency), but that governs one mandate, not spending across merchants or protocols. Each protocol still tracks its own transactions in isolation.
 
 *Current-state verification of a counterparty* is a query over present state rather than history: does this wallet satisfy some condition right now — holding a credential, clearing a token threshold — at the moment a payment is about to route. AP2 does not cover it — a mandate authorizes a future payment rather than attesting to present state. Douglas Borthwick argues in [#2](https://github.com/goodmeta/agent-payments-landscape/issues/2) that none of the five sign such a claim, which matches the reading here but has not been checked protocol by protocol.
 
-Neither gap is solved here, and neither has a section: a pattern earns one in this doc when several communities converge on it independently, the way the budget-reservation shape did.
 
-**A second, adjacent gap:** none of the five specs define a post-execution record that a third party can verify without trusting the merchant, the agent operator, or the protocol's own logs. Settlement proofs (the on-chain transaction, the signed mandate) prove *that a payment cleared* — none commit to a content-addressed, independently-recomputable record of *what the agent was authorized to do and whether that matches what happened*. This is a different layer than settlement or budget tracking: it's evidence, checkable after the fact by someone who wasn't part of the transaction. action_ref/negotiation_ref (IETF draft-etcheverry-action-ref) is one open, permissionless-anchored implementation of this layer, with worked examples against real code from eight tools in the broader agent-payments space [11].
+*Post-execution evidence* is a third gap, distinct from both of the above: none of the five specs define a post-execution record that a third party can verify without trusting the merchant, the agent operator, or the protocol's own logs. Settlement proofs (the on-chain transaction, the signed mandate) prove *that a payment cleared* — none commit to an independently recomputable record of *what the agent was authorized to do and whether that matches what happened*. Evidence, checkable after the fact by someone who wasn't part of the transaction. Raised by giskard09 in [#6](https://github.com/goodmeta/agent-payments-landscape/pull/6).
+
+None of the three is solved here, and none has a section: a pattern earns one in this doc when several communities converge on it independently, the way the budget-reservation shape did.
 
 ## Budget Reservation Protocol (Draft)
 
@@ -97,8 +98,6 @@ See individual protocol pages for deeper analysis:
 [9] UCP `docs/specification/checkout-mcp.md` — MCP checkout binding
 
 [10] x402 `docs/sdk-features.md` + buyer quickstart — `spendControls` client safety feature, TypeScript only (PR [#3124](https://github.com/x402-foundation/x402/pull/3124), [#3147](https://github.com/x402-foundation/x402/pull/3147), merged 2026-08-13)
-
-[11] `action_ref`/`negotiation_ref` spec — [argentum-core/docs/spec/action-ref.md](https://github.com/giskard09/argentum-core/blob/main/docs/spec/action-ref.md), IETF `draft-etcheverry-action-ref`. Independent conformance suite (57/57 blind-tested by a separate implementer). Worked examples anchored on Base mainnet against real code from eight agent-payment tools: [giskard09/agent-accountability-landscape](https://github.com/giskard09/agent-accountability-landscape).
 
 ## Contributing
 
