@@ -49,7 +49,13 @@ This is a neutral, practitioner-maintained reference. No protocol advocacy. Ever
 
 ACP and UCP are alternatives at the commerce layer. AP2 is the authorization layer that plugs into UCP (and could theoretically plug into ACP). x402 and MPP compete at settlement. AP2 sits above both and works regardless of which settlement protocol wins.
 
-**The gap nobody fills:** cross-protocol budget tracking. An agent that shops via UCP, pays for APIs via MPP, and settles via x402 has no unified spending verification across all three. AP2 v0.2 added a single-mandate `budget` field (max + currency), but that governs one mandate — not spending across merchants or protocols. Each protocol still tracks its own transactions in isolation.
+**The gaps nobody fills.** An agent that shops via UCP, pays for APIs via MPP, and settles via x402 leaves two separate questions unanswered, and they are worth keeping apart.
+
+*Cumulative spend across rails* is a rollup over history: what has this agent already spent, everywhere, against one limit. AP2 v0.2 added a single-mandate `budget` field (max + currency), but that governs one mandate, not spending across merchants or protocols. Each protocol still tracks its own transactions in isolation.
+
+*Current-state verification of a counterparty* is a query over present state rather than history: does this wallet satisfy some condition right now — holding a credential, clearing a token threshold — at the moment a payment is about to route. AP2 does not cover it — a mandate authorizes a future payment rather than attesting to present state. Douglas Borthwick argues in [#2](https://github.com/goodmeta/agent-payments-landscape/issues/2) that none of the five sign such a claim, which matches the reading here but has not been checked protocol by protocol.
+
+Neither gap is solved here, and neither has a section: a pattern earns one in this doc when several communities converge on it independently, the way the budget-reservation shape did.
 
 ## Budget Reservation Protocol (Draft)
 
