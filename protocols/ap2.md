@@ -16,31 +16,31 @@ The v0.2 spec defines two mandate types, each with a "closed" (direct human appr
 
 1. **Checkout Mandate** — what the user authorizes for a purchase (merchant, items, constraints). In the open form, carries pre-authorized constraints for autonomous purchases.
 
-2. **Payment Mandate** — authorization to charge, bound to the checkout. Carries a structured `budget` constraint (`max` amount + `currency`) plus recurrence rules. Shared with payment networks/issuers alongside standard transaction auth messages.
+2. **Payment Mandate** — authorization to charge, bound to the checkout. In the open form it can carry a `payment.budget` constraint (`max` + `currency`) used with the `payment.agent_recurrence` constraint: each new charge plus the total of charges already made under that same open mandate MUST stay within `max`, and each approved amount is added to the running total. Shared with payment networks/issuers alongside standard transaction auth messages.
 
-(The earlier IntentMandate / CartMandate / PaymentMandate naming from v0.1 survives only in the Python sample models, not the v0.2 spec text.)
+(The earlier IntentMandate / CartMandate / PaymentMandate naming from v0.1 is not in the v0.2 spec text, but still names the model classes in the Python SDK (`code/sdk/python/ap2/models/mandate.py`) and the Go samples.)
 
 ## What It Covers
 
 - Human-present and human-not-present transaction flows
 - Mandate signing and binding (user device key, merchant JWT)
-- Accountability matrix (who's liable when things go wrong)
-- Risk signals framework (Section 7)
+- Dispute evidence (what each party can present after the fact)
+- Verification steps for merchant, credential provider/network, and merchant payment processor
+- Extension points: mandate constraints, checkout object, payment instrument, credential formats
 - A2A protocol extension for agent-to-agent flows
 
 ## What It Doesn't Cover (Yet)
 
-- Cross-merchant budget enforcement (a single-mandate `budget` field now exists, but cross-merchant coordination does not — Issue #207)
-- A production verification SDK (v0.2 ships sample MCP servers for every role; the FAQ notes a production SDK + MCP server are still "in progress")
+- Cross-merchant budget enforcement. The `payment.budget` total runs across repeated uses of one open Payment Mandate; nothing tracks spend across mandates or merchants (Issue #207)
 - Push payments, real-time transfers, e-wallets
 
 ## Repo Status — Stalled Since April
 
 Nothing has been merged into `main` since 2026-04-29 (PR #246, a lockfile removal). The last substantive merge was the v0.2 release itself on 2026-04-28.
 
-Meanwhile the queue keeps growing: **75 open pull requests and 68 open issues** as of 2026-08-18, including PRs opened in August that fix real defects in the shipped SDK (checkout-binding enforcement in chain verify #330, SD-JWT audience/nonce checks #326 and #313, payment-instrument extension fields lost through signing #329/#333).
+Meanwhile the open queue keeps growing, including PRs opened in August that fix real defects in the shipped SDK (checkout-binding enforcement in chain verify #330, SD-JWT audience/nonce checks #326 and #313, payment-instrument extension fields lost through signing #329/#333).
 
-This is consistent with the governance move — `CONTRIBUTING.md` scopes this repo to samples and SDK, with spec work at FIDO. What it means in practice: contributors are filing fixes against the shipped Python SDK and none have been merged for 3.5 months. Anyone building on that SDK should read the open-PR list first. Whether merges resume is an open question, not something the repo answers either way.
+This is consistent with the governance move — `CONTRIBUTING.md` scopes this repo to samples and SDK, with spec work at FIDO. What it means in practice: contributors are filing fixes against the shipped Python SDK and none have been merged in more than five months. Anyone building on that SDK should read the open-PR list first. Whether merges resume is an open question, not something the repo answers either way.
 
 ## Key Open Issues
 
@@ -51,7 +51,7 @@ This is consistent with the governance move — `CONTRIBUTING.md` scopes this re
 - [#214](https://github.com/google-agentic-commerce/AP2/issues/214) — AP2/A2A challenge flow underdefined at contract layer
 - [#215](https://github.com/google-agentic-commerce/AP2/issues/215) — Human-present approval chain underdefined
 
-All six were still open on 2026-08-18.
+All six were still open on 2026-10-12.
 
 ## Recent Activity (since 2026-06-01)
 
@@ -62,21 +62,21 @@ All six were still open on 2026-08-18.
 
 - **v0.2.0 released (2026-04-28)** — Human-Not-Present flows specified; Python SDK shipped (`code/sdk/python/`); Android samples added; structured `budget` constraint added to the spec + JSON schema
 - **Core spec donated to the FIDO Alliance (2026-04-28)** — a new FIDO Payments Technical Working Group (chaired by Mastercard + Visa members) takes over spec development; Mastercard's "Verifiable Intent" framework co-donated
-- **MCP sample servers shipped** for all AP2 roles (credentials provider, merchant agent, payment processor, x402 variants)
+- **MCP sample servers shipped** for the credentials provider, merchant, and merchant payment processor roles (plus x402 variants); the shopping agent has no MCP server
 - **AP2 + x402 Human-Not-Present scenario** added as runnable sample code
 - **CONTRIBUTING.md** now scopes the GitHub repo to samples + SDK only; spec contributions go to FIDO
 
 ## Relationship to Other Protocols
 
-- **UCP** uses AP2 mandates as an extension (`dev.ucp.shopping.ap2_mandate`)
+- **UCP** uses AP2 mandates as an extension (`dev.ucp.common.payment.ap2_mandate`)
 - **x402** has an A2A x402 extension for crypto settlement within AP2 flows
 - **ACP** is an alternative approach to the same problem (OpenAI+Stripe vs Google)
 
 ## Sources
 
 - [Specification (v0.2)](https://github.com/google-agentic-commerce/AP2/blob/main/docs/ap2/specification.md)
-- [Payment Mandate + budget](https://github.com/google-agentic-commerce/AP2/blob/main/docs/ap2/payment_mandate.md)
+- [Payment Mandate + budget](https://github.com/google-agentic-commerce/AP2/blob/main/docs/ap2/payment_mandate.md) (`payment.budget` evaluation rule)
 - [Mandate models (Python SDK)](https://github.com/google-agentic-commerce/AP2/blob/main/code/sdk/python/ap2/models/mandate.py)
 - [FIDO Alliance announcement](https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/)
 
-*Last verified: 2026-08-18*
+*Last verified: 2026-10-12*
