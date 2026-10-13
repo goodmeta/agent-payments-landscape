@@ -52,7 +52,7 @@ UCP powers checkout in Gemini and AI Mode in Google Search (live for US users, J
 
 ## Earlier Changes (2026-06-01 to 2026-08-18)
 
-- **Payment Terms extension** merged ([PR #602](https://github.com/Universal-Commerce-Protocol/ucp/pull/602), 2026-08-14) — now `dev.ucp.common.payment.terms`. A merchant publishes the payment terms it accepts (pay in full, deposit plus balance, installments), the buyer selects one, and the merchant renegotiates the rest of checkout around it. Adds `payment.terms[]` and `payment.selected_term_id` on Checkout and `payment.accepted_term` on Order. Every date on the wire is an absolute RFC 3339 timestamp; no recurrence rules.
+- **Payment Terms extension** merged ([PR #602](https://github.com/Universal-Commerce-Protocol/ucp/pull/602), 2026-08-14) — now `dev.ucp.common.payment.terms`. A merchant publishes the payment terms it accepts (pay in full, deposit plus balance, installments), the buyer selects one, and the merchant renegotiates the rest of checkout around it. Adds `payment.terms[]` and `payment.selected_term_id` on Checkout and `payment.accepted_term` on Order. Due dates (`due_at`) are absolute RFC 3339 date-times.
 
 ## Earlier Changes (2026-04-14 to 2026-06-01)
 

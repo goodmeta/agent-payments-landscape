@@ -15,7 +15,7 @@ Settlement layer using HTTP 402 with a challenge/credential/receipt flow. Like x
 - **Challenge** — server returns 402 with `WWW-Authenticate: Payment` specifying intent, amount, method
 - **Credential** — client signs and returns payment proof in `Authorization: Payment` header
 - **Receipt** — server confirms settlement in `Payment-Receipt` response header
-- **Accept-Payment** — client-side header (modeled on `Accept-Language`) declaring supported payment methods and preferences. Reduces wasted server computation. Defined in the core spec.
+- **Accept-Payment** — client-side header (using the same weighted-preference model as other HTTP negotiation headers) declaring supported payment methods and preferences. Reduces wasted server computation. Defined in the core spec.
 - **Intents** — the type of payment. `charge` (one-time) and `subscription` (recurring, merged 2026-07-29) are core intents on main. Session specs exist per payment method: Tempo, Lightning, EVM, Hedera, Solana and XRPL. The `authorize` intent PR was closed without merging.
 - **Methods** — payment-method specs on main: card, evm (unified charge, merged 2026-04-17; session, merged 2026-07-03), hedera (merged 2026-05-14), lightning, nearintents, solana, stellar, stripe, tempo, usdc, xrpl. Initia still open; TON NanoPay was closed without merge.
 - **Extensions** — discovery (OpenAPI), MCP transport, community extensions
